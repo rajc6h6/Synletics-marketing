@@ -285,9 +285,6 @@
             box-shadow: 
                 0 20px 60px rgba(0, 0, 0, 0.5),
                 0 0 0 1px rgba(255, 255, 255, 0.05);
-            transition: transform 0.1s ease-out;
-            transform-style: preserve-3d;
-            perspective: 1000px;
         }
 
         .mockup-header {
@@ -455,7 +452,22 @@
             font-weight: 600;
         }
 
-        /* Features Section with Bento Grid */
+        /* Dashboard Embed Container */
+        .dashboard-embed {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            margin-top: 1.5rem;
+        }
+
+        .dashboard-embed iframe {
+            width: 100%;
+            height: 675px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+                /* Features Section with Bento Grid */
         .features {
             position: relative;
             padding: 6rem 2rem;
@@ -1106,6 +1118,10 @@
             .cta-container p {
                 font-size: 1.1rem;
             }
+            .dashboard-embed iframe {
+                height: 450px;
+            }
+
 
             .time-period-selector {
                 flex-wrap: wrap;
@@ -1133,12 +1149,12 @@
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
-            <div class="logo">Synlitics</div>
+            <div class="logo">Synletics</div>
             <ul class="nav-links">
                 <li><a href="#features">Features</a></li>
                 <li><a href="#how-it-works">How It Works</a></li>
                 <li><a href="#pricing">Pricing</a></li>
-                <li><a href="https://app.synlitics.com" class="cta-button">Try it for Free</a></li>
+                <li><a href="#" class="cta-button">Try it for Free</a></li>
             </ul>
             <button class="mobile-menu-toggle">☰</button>
         </div>
@@ -1179,60 +1195,27 @@
 
     <!-- Dashboard Mockup Section -->
     <section class="dashboard-section">
-        <div class="dashboard-mockup" id="dashboard-3d">
+        <div class="dashboard-mockup">
             <div class="mockup-header">
-                <h3>Your Dashboard — Ready by Morning</h3>
+                <h3>Your Dashboard Ready by Morning</h3>
                 <p>Real-time insights across all delivery platforms</p>
-                <div class="time-period-selector">
-                    <button class="period-btn active">Daily</button>
-                    <button class="period-btn">Weekly</button>
-                    <button class="period-btn">Monthly</button>
-                </div>
             </div>
-            <div class="mockup-grid">
-                <div class="mockup-card">
-                    <h4>Total Revenue</h4>
-                    <div class="mockup-value">$24,387</div>
-                    <div class="mockup-change positive">↑ 12.5% vs yesterday</div>
-                </div>
-                <div class="mockup-card">
-                    <h4>Net Profit</h4>
-                    <div class="mockup-value">$8,642</div>
-                    <div class="mockup-change positive">↑ 8.3% vs yesterday</div>
-                </div>
-                <div class="mockup-card">
-                    <h4>Total Orders</h4>
-                    <div class="mockup-value">347</div>
-                    <div class="mockup-change positive">↑ 15.2% vs yesterday</div>
-                </div>
-                <div class="sync-status-card">
-                    <h4>Sync Status</h4>
-                    <div class="platform-status">
-                        <div class="status-item">
-                            <span class="status-name">
-                                <span class="pulse-indicator"></span>
-                                DoorDash
-                            </span>
-                            <span class="status-badge">Connected</span>
-                        </div>
-                        <div class="status-item">
-                            <span class="status-name">
-                                <span class="pulse-indicator"></span>
-                                Uber Eats
-                            </span>
-                            <span class="status-badge">Connected</span>
-                        </div>
-                        <div class="status-item">
-                            <span class="status-name">
-                                <span class="pulse-indicator"></span>
-                                Grubhub
-                            </span>
-                            <span class="status-badge">Connected</span>
-                        </div>
-                    </div>
-                </div>
+
+            <!-- Interactive Looker Studio Dashboard -->
+            <div class="dashboard-embed">
+                <iframe 
+                    width="1200" 
+                    height="675" 
+                    src="https://lookerstudio.google.com/embed/reporting/9125dd21-71d5-4714-a0af-8999490ff4e5/page/sErjF" 
+                    frameborder="0" 
+                    style="border:0; border-radius: 12px;" 
+                    allowfullscreen 
+                    sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox">
+                </iframe>
             </div>
         </div>
+    </section>
+
     </section>
 
     <!-- Features Section with Bento Grid -->
@@ -1326,11 +1309,11 @@
         </div>
 
         <div class="pricing-toggle">
-            <span class="toggle-label" id="monthly-label">Monthly</span>
+            <span class="toggle-label" id="monthly-label">Yearly</span>
             <div class="toggle-switch" id="pricing-toggle">
                 <div class="toggle-slider"></div>
             </div>
-            <span class="toggle-label active" id="yearly-label">Yearly</span>
+            <span class="toggle-label active" id="yearly-label">Monthly</span>
         </div>
 
         <div class="pricing-grid">
@@ -1360,7 +1343,7 @@
                 <div class="price" id="growth-price">$149<span>/month</span></div>
                 <div class="savings-badge" id="growth-savings">Save $600/year</div>
                 <p class="price-note">No Credit Card Required</p>
-              <a href="https://app.synlitics.com" class="pricing-cta primary">Start Free Trial</a>
+                <a href="https://app.synlitics.com" class="pricing-cta primary">Start Free Trial</a>
                 <ul class="features-list">
                     <li>Up to 5 Restaurant Locations</li>
                     <li>Everything in Starter, plus:</li>
@@ -1378,7 +1361,7 @@
                 <p class="subtitle">For multi-location chains</p>
                 <div class="price">Custom</div>
                 <p class="price-note">Tailored to your needs</p>
-                <a href="#" class="pricing-cta secondary">Contact Sales</a>
+                <a href="https://app.synlitics.com" class="pricing-cta secondary">Contact Sales</a>
                 <ul class="features-list">
                     <li>Unlimited Locations</li>
                     <li>Everything in Growth, plus:</li>
@@ -1406,7 +1389,7 @@
         <div class="cta-container">
             <h2>Ready to End the Spreadsheet Nightmares?</h2>
             <p>Join restaurant owners who are already sleeping better</p>
-           <a href="https://app.synlitics.com" class="cta-button-large">Try it for Free — Upload Your First File</a>
+            <a href="https://app.synlitics.com" class="cta-button-large">Try it for Free — Upload Your First File</a>
         </div>
     </section>
 
@@ -1414,7 +1397,7 @@
     <footer>
         <div class="footer-content">
             <div>
-                <div class="footer-logo">Synlitics</div>
+                <div class="footer-logo">Synletics</div>
                 <p class="footer-description">The Morning Tea Dashboard for multi-unit restaurant owners. Transform delivery data chaos into automated P&L clarity.</p>
             </div>
             <div class="footer-section">
@@ -1451,27 +1434,7 @@
 
     <!-- JavaScript -->
     <script>
-        // 3D Dashboard Tilt Effect
-        const dashboard = document.getElementById('dashboard-3d');
-
-        dashboard.addEventListener('mousemove', (e) => {
-            const rect = dashboard.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-
-            const rotateX = (y - centerY) / 30;
-            const rotateY = (centerX - x) / 30;
-
-            dashboard.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-        });
-
-        dashboard.addEventListener('mouseleave', () => {
-            dashboard.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
-        });
-
+        
         // Time Period Selector
         const periodButtons = document.querySelectorAll('.period-btn');
 
