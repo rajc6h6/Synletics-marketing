@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Synlitics — The Morning Tea Dashboard for Restaurant Owners</title>
+    <title>Synlitics - The Morning Tea Dashboard for Restaurant Owners</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
     <style>
         :root {
             --navy-900: #020617;
@@ -163,7 +164,7 @@
         }
 
         .hero-badge::before {
-            content: '✨';
+            content: '🔥';
         }
 
         h1 {
@@ -258,7 +259,7 @@
 
         .platform-logo:hover {
             opacity: 1;
-            filter: grayscale(0%);
+            filter: grayscale(0);
             transform: translateY(-4px);
         }
 
@@ -389,69 +390,6 @@
             color: #ef4444;
         }
 
-        /* Sync Status Card */
-        .sync-status-card {
-            background: rgba(30, 41, 59, 0.5);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            padding: 1.8rem;
-        }
-
-        .sync-status-card h4 {
-            font-size: 0.85rem;
-            color: var(--gray-400);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 1.2rem;
-        }
-
-        .platform-status {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .status-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.8rem;
-            background: rgba(51, 65, 85, 0.3);
-            border-radius: 8px;
-        }
-
-        .status-name {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            font-weight: 500;
-        }
-
-        .pulse-indicator {
-            width: 10px;
-            height: 10px;
-            background: var(--green-500);
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-            }
-            50% {
-                box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
-            }
-        }
-
-        .status-badge {
-            font-size: 0.85rem;
-            color: var(--green-500);
-            font-weight: 600;
-        }
-
         /* Dashboard Embed Container */
         .dashboard-embed {
             width: 100%;
@@ -467,7 +405,7 @@
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
 
-                /* Features Section with Bento Grid */
+        /* Features Section with Bento Grid */
         .features {
             position: relative;
             padding: 6rem 2rem;
@@ -1107,10 +1045,6 @@
                 grid-template-columns: 1fr;
             }
 
-            .nav-links {
-                display: none;
-            }
-
             .cta-container h2 {
                 font-size: 2rem;
             }
@@ -1118,10 +1052,10 @@
             .cta-container p {
                 font-size: 1.1rem;
             }
+
             .dashboard-embed iframe {
                 height: 450px;
             }
-
 
             .time-period-selector {
                 flex-wrap: wrap;
@@ -1134,18 +1068,644 @@
             background: none;
             border: none;
             color: var(--white);
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            position: relative;
+            z-index: 1001;
+        }
+
+        /* Hamburger Icon Styling */
+        .mobile-menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 2px;
+            background: var(--white);
+            margin: 5px 0;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        /* Mobile Menu Overlay */
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .mobile-menu-overlay.active {
+            display: block;
+            opacity: 1;
         }
 
         @media (max-width: 768px) {
             .mobile-menu-toggle {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+
+        /* ========== MOBILE OPTIMIZATIONS ========== */
+
+        @media (max-width: 768px) {
+            * {
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            body {
+                overflow-x: hidden;
+            }
+
+            section {
+                padding: 40px 20px !important;
+                margin: 0 !important;
+            }
+
+            h1 {
+                font-size: 32px !important;
+                line-height: 1.2 !important;
+            }
+
+            h2 {
+                font-size: 24px !important;
+                line-height: 1.3 !important;
+                margin-bottom: 30px !important;
+            }
+
+            p {
+                font-size: 16px !important;
+                line-height: 1.5 !important;
+            }
+
+            /* ========== MOBILE NAVIGATION - COMPACT & OPTIMIZED ========== */
+            nav {
+                padding: 0.8rem 0 !important;
+            }
+
+            .nav-container {
+                padding: 0 20px !important;
+            }
+
+            .logo {
+                font-size: 1.4rem !important;
+            }
+
+            .mobile-menu-toggle {
+                display: block !important;
+                background: none;
+                border: none;
+                color: var(--white);
+                font-size: 1.5rem;
+                cursor: pointer;
+                padding: 8px;
+                z-index: 1001;
+                position: relative;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 60px;
+                right: -100%;
+                height: calc(100vh - 60px);
+                width: 280px;
+                background: rgba(15, 23, 42, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: stretch;
+                padding: 20px 0;
+                transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                box-shadow: -5px 0 25px rgba(0,0,0,0.5);
+                z-index: 1000;
+                overflow-y: auto;
+                border-left: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .nav-links.active {
+                right: 0 !important;
+            }
+
+            .nav-links li {
+                width: 100%;
+                margin: 0;
+            }
+
+            .nav-links a {
+                width: 100%;
+                padding: 16px 25px !important;
+                text-align: left;
+                border-bottom: 1px solid rgba(255,255,255,0.08);
+                font-size: 15px !important;
                 display: block;
+                transition: all 0.2s ease;
+            }
+
+            .nav-links a:hover {
+                transform: none !important;
+                background: rgba(255, 255, 255, 0.05);
+                color: var(--white) !important;
+            }
+
+            .nav-links .cta-button {
+                margin: 20px 25px 10px 25px !important;
+                width: calc(100% - 50px) !important;
+                text-align: center;
+                padding: 14px 20px !important;
+                font-size: 14px !important;
+                border-radius: 8px;
+            }
+
+            .nav-links .cta-button:hover {
+                transform: none !important;
+            }
+
+            /* ========== HERO BADGE FIX ========== */
+            .hero {
+                padding: 100px 20px 40px !important;
+            }
+
+            .hero-badge {
+                font-size: 13px !important;
+                padding: 8px 16px !important;
+                margin-bottom: 20px !important;
+                display: inline-flex !important;
+                align-items: center !important;
+            }
+
+            .hero-badge::before {
+                font-size: 16px;
+                margin-right: 6px;
+            }
+
+            /* ========== TOUCH FEEDBACK CLASSES ========== */
+            .touch-feedback {
+                transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+            }
+
+            .touch-active {
+                transform: scale(0.97) !important;
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4) !important;
+            }
+
+            .button-touch-active {
+                transform: scale(0.95) !important;
+                opacity: 0.9 !important;
+            }
+
+            /* ========== DISABLE ALL PC HOVER EFFECTS ========== */
+            .feature-card:hover,
+            .feature-card.hero-card:hover,
+            .step-card:hover,
+            .pricing-card:hover,
+            .mockup-card:hover,
+            .testimonial-card:hover,
+            .platform-logo:hover,
+            .cta-button:hover,
+            .primary-cta:hover,
+            .secondary-cta:hover,
+            .cta-button-large:hover,
+            .pricing-cta:hover,
+            .pricing-cta.primary:hover,
+            .pricing-cta.secondary:hover,
+            .period-btn:hover,
+            .toggle-switch:hover,
+            .footer-links a:hover {
+                transform: none !important;
+                box-shadow: inherit !important;
+                border-color: inherit !important;
+                background: inherit !important;
+                opacity: inherit !important;
+                filter: inherit !important;
+                color: inherit !important;
+            }
+
+            /* Dashboard */
+            .dashboard-embed {
+                width: 100% !important;
+                margin: 20px 0 !important;
+                padding: 0 !important;
+            }
+
+            .dashboard-embed iframe {
+                width: 100% !important;
+                height: 400px !important;
+                border-radius: 8px !important;
+            }
+
+            .hero h1, .hero h1 {
+                font-size: 32px !important;
+                margin-bottom: 15px !important;
+            }
+
+            .hero .subtitle, .hero-subtitle {
+                font-size: 16px !important;
+                margin-bottom: 25px !important;
+            }
+
+            /* BENTO GRID */
+            .bento-grid {
+                display: flex !important;
+                flex-direction: row !important;
+                overflow-x: auto !important;
+                overflow-y: hidden !important;
+                scroll-snap-type: x mandatory !important;
+                gap: 20px !important;
+                padding: 0 20px 30px 20px !important;
+                margin: 0 -20px !important;
+                scrollbar-width: none !important;
+                -ms-overflow-style: none !important;
+            }
+
+            .bento-grid::-webkit-scrollbar {
+                display: none !important;
+            }
+
+            .bento-grid .feature-card {
+                min-width: calc(100vw - 80px) !important;
+                max-width: calc(100vw - 80px) !important;
+                flex-shrink: 0 !important;
+                scroll-snap-align: center !important;
+                padding: 30px !important;
+                margin-bottom: 0 !important;
+            }
+
+            .bento-grid .feature-card.hero-card {
+                min-width: calc(100vw - 80px) !important;
+                max-width: calc(100vw - 80px) !important;
+                grid-column: auto !important;
+            }
+
+            .bento-grid .feature-card h3 {
+                font-size: 20px !important;
+                margin-bottom: 15px !important;
+            }
+
+            .bento-grid .feature-card p {
+                font-size: 15px !important;
+                line-height: 1.7 !important;
+            }
+
+            .feature-icon {
+                width: 48px !important;
+                height: 48px !important;
+                font-size: 24px !important;
+                margin-bottom: 20px !important;
+            }
+
+            /* STEPS SECTION */
+            .steps-grid {
+                display: flex !important;
+                flex-direction: row !important;
+                overflow-x: auto !important;
+                overflow-y: hidden !important;
+                scroll-snap-type: x mandatory !important;
+                gap: 20px !important;
+                padding: 0 20px 30px 20px !important;
+                margin: 0 -20px !important;
+                scrollbar-width: none !important;
+                -ms-overflow-style: none !important;
+            }
+
+            .steps-grid::-webkit-scrollbar {
+                display: none !important;
+            }
+
+            .step-card {
+                min-width: calc(100vw - 80px) !important;
+                max-width: calc(100vw - 80px) !important;
+                flex-shrink: 0 !important;
+                scroll-snap-align: center !important;
+                margin-bottom: 0 !important;
+                padding: 50px 30px 30px 30px !important;
+                position: relative !important;
+            }
+
+            .step-number {
+                position: absolute !important;
+                top: 20px !important;
+                left: 20px !important;
+                width: 36px !important;
+                height: 36px !important;
+                font-size: 16px !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                z-index: 10 !important;
+            }
+
+            .step-icon {
+                font-size: 32px !important;
+                margin-bottom: 15px !important;
+                margin-top: 10px !important;
+            }
+
+            .step-card h3 {
+                font-size: 20px !important;
+                margin-bottom: 12px !important;
+            }
+
+            .step-card p {
+                font-size: 15px !important;
+                line-height: 1.7 !important;
+            }
+
+            /* PRICING SECTION */
+            .pricing-grid {
+                display: flex !important;
+                flex-direction: row !important;
+                overflow-x: auto !important;
+                overflow-y: hidden !important;
+                scroll-snap-type: x mandatory !important;
+                gap: 20px !important;
+                padding: 0 20px 30px 20px !important;
+                margin: 0 -20px !important;
+                scrollbar-width: none !important;
+                -ms-overflow-style: none !important;
+            }
+
+            .pricing-grid::-webkit-scrollbar {
+                display: none !important;
+            }
+
+            .pricing-card {
+                min-width: calc(100vw - 80px) !important;
+                max-width: calc(100vw - 80px) !important;
+                flex-shrink: 0 !important;
+                scroll-snap-align: center !important;
+                margin-bottom: 0 !important;
+                padding: 30px !important;
+            }
+
+            /* Carousel Indicators */
+            .carousel-indicators {
+                display: flex;
+                justify-content: center;
+                gap: 8px;
+                margin-top: 20px;
+                padding: 10px 0;
+            }
+
+            .carousel-dot {
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.3);
+                transition: all 0.2s ease;
+                cursor: pointer;
+            }
+
+            .carousel-dot.active {
+                background: #667eea;
+                width: 24px;
+                border-radius: 4px;
+            }
+
+            .card-counter {
+                text-align: center;
+                font-size: 14px;
+                color: rgba(255, 255, 255, 0.6);
+                margin-top: 15px;
+                font-weight: 500;
+            }
+
+            /* Platform Logos */
+            .platform-logos {
+                padding: 30px 20px !important;
+            }
+
+            .logos-grid {
+                display: grid !important;
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 20px !important;
+                justify-items: center !important;
+                align-items: center !important;
+            }
+
+            .platform-logo, .logos-grid div {
+                width: 100% !important;
+                display: flex !important;
+                justify-content: center !important;
+            }
+
+            .platform-logo svg {
+                width: 80px !important;
+                height: auto !important;
+                max-width: 100% !important;
+            }
+
+            /* Dashboard Mockup */
+            .dashboard-mockup {
+                padding: 20px !important;
+            }
+
+            .mockup-header h3 {
+                font-size: 20px !important;
+            }
+
+            .mockup-header p {
+                font-size: 14px !important;
+            }
+
+            .mockup-grid {
+                grid-template-columns: 1fr !important;
+                gap: 15px !important;
+            }
+
+            .mockup-card {
+                padding: 20px !important;
+            }
+
+            .mockup-value {
+                font-size: 24px !important;
+            }
+
+            .time-period-selector {
+                justify-content: center !important;
+                flex-wrap: wrap !important;
+                gap: 10px !important;
+            }
+
+            .period-btn {
+                padding: 10px 16px !important;
+                font-size: 14px !important;
+            }
+
+            /* Footer */
+            footer {
+                padding: 40px 20px 30px !important;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr !important;
+                gap: 30px !important;
+                text-align: center !important;
+            }
+
+            .footer-section h4 {
+                font-size: 16px !important;
+                margin-bottom: 15px !important;
+            }
+
+            .footer-links {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                gap: 12px !important;
+            }
+
+            .footer-links li {
+                margin-bottom: 0 !important;
+            }
+
+            .footer-links a {
+                font-size: 15px !important;
+                padding: 8px 0 !important;
+            }
+
+            .footer-description {
+                font-size: 15px !important;
+                line-height: 1.7 !important;
+            }
+
+            .footer-bottom {
+                padding-top: 25px !important;
+                margin-top: 30px !important;
+                border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+            }
+
+            .footer-bottom p {
+                font-size: 14px !important;
+            }
+
+            /* Testimonial */
+            .testimonial-card {
+                padding: 30px 20px !important;
+            }
+
+            .testimonial-text {
+                font-size: 16px !important;
+                line-height: 1.7 !important;
+            }
+
+            .testimonial-author {
+                font-size: 14px !important;
+            }
+
+            .quote-icon {
+                font-size: 32px !important;
+            }
+
+            /* CTA Section */
+            .cta-container {
+                padding: 40px 25px !important;
+                border-radius: 16px !important;
+            }
+
+            .cta-container h2 {
+                font-size: 24px !important;
+                margin-bottom: 15px !important;
+            }
+
+            .cta-container p {
+                font-size: 16px !important;
+                margin-bottom: 25px !important;
+            }
+
+            /* CTA Buttons */
+            .cta-button, .secondary-button, .primary-cta, .secondary-cta, .cta-button-large, .pricing-cta {
+                padding: 16px 32px !important;
+                font-size: 16px !important;
+                width: 100% !important;
+                max-width: 320px !important;
+                display: block !important;
+                margin: 15px auto !important;
+            }
+
+            .hero-cta {
+                flex-direction: column !important;
+                gap: 15px !important;
+            }
+
+            /* Section Headers */
+            .section-header {
+                margin-bottom: 30px !important;
+                text-align: center !important;
+            }
+
+            .section-badge {
+                font-size: 12px !important;
+                padding: 6px 12px !important;
+            }
+
+            .section-header h2 {
+                font-size: 24px !important;
+            }
+
+            .section-header p {
+                font-size: 15px !important;
+                line-height: 1.6 !important;
+            }
+        }
+
+        @media (max-width: 380px) {
+            h1 {
+                font-size: 24px !important;
+            }
+
+            .nav-links {
+                width: 220px !important;
+            }
+
+            .bento-grid .feature-card,
+            .step-card,
+            .pricing-card {
+                min-width: calc(100vw - 60px) !important;
+                max-width: calc(100vw - 60px) !important;
+                padding: 45px 25px 25px 25px !important;
+            }
+
+            .step-number {
+                top: 15px !important;
+                left: 15px !important;
+                width: 32px !important;
+                height: 32px !important;
+                font-size: 14px !important;
+            }
+
+            .logos-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay"></div>
+
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
@@ -1156,7 +1716,11 @@
                 <li><a href="#pricing">Pricing</a></li>
                 <li><a href="https://app.synlitics.com" class="cta-button">Try it for Free</a></li>
             </ul>
-            <button class="mobile-menu-toggle">☰</button>
+            <button class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
 
@@ -1176,17 +1740,17 @@
             <div class="logos-grid">
                 <div class="platform-logo">
                     <svg width="140" height="40" viewBox="0 0 140 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <text x="10" y="28" font-family="Plus Jakarta Sans, sans-serif" font-weight="700" font-size="22" fill="currentColor">DoorDash</text>
+                        <text x="10" y="28" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="22" fill="currentColor">DoorDash</text>
                     </svg>
                 </div>
                 <div class="platform-logo">
                     <svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <text x="10" y="28" font-family="Plus Jakarta Sans, sans-serif" font-weight="700" font-size="22" fill="currentColor">Uber Eats</text>
+                        <text x="10" y="28" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="22" fill="currentColor">Uber Eats</text>
                     </svg>
                 </div>
                 <div class="platform-logo">
                     <svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <text x="10" y="28" font-family="Plus Jakarta Sans, sans-serif" font-weight="700" font-size="22" fill="currentColor">Grubhub</text>
+                        <text x="10" y="28" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="22" fill="currentColor">Grubhub</text>
                     </svg>
                 </div>
             </div>
@@ -1197,25 +1761,15 @@
     <section class="dashboard-section">
         <div class="dashboard-mockup">
             <div class="mockup-header">
-                <h3>Your Dashboard Ready by Morning</h3>
+                <h3>Your Dashboard — Ready by Morning</h3>
                 <p>Real-time insights across all delivery platforms</p>
             </div>
 
             <!-- Interactive Looker Studio Dashboard -->
             <div class="dashboard-embed">
-                <iframe 
-                    width="1200" 
-                    height="675" 
-                    src="https://lookerstudio.google.com/embed/reporting/9125dd21-71d5-4714-a0af-8999490ff4e5/page/sErjF" 
-                    frameborder="0" 
-                    style="border:0; border-radius: 12px;" 
-                    allowfullscreen 
-                    sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox">
-                </iframe>
+                <iframe width="1200" height="675" src="https://lookerstudio.google.com/embed/reporting/9125dd21-71d5-4714-a0af-8999490ff4e5/page/ErjF" frameborder="0" style="border:0; border-radius: 12px;" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
             </div>
         </div>
-    </section>
-
     </section>
 
     <!-- Features Section with Bento Grid -->
@@ -1225,10 +1779,11 @@
             <h2>Built for Restaurant Owners</h2>
             <p>Eliminate chaos and scale confidently with automated data intelligence</p>
         </div>
+
         <div class="bento-grid">
             <!-- Hero Card -->
             <div class="feature-card hero-card">
-                <div class="feature-icon">🎯</div>
+                <div class="feature-icon">📊</div>
                 <h3>Unified Order Hub</h3>
                 <p>All orders from DoorDash, Uber Eats, and Grubhub flow into one intelligent dashboard. No more switching between apps or missing orders. Every order is synced in Single Place with 100% accuracy.</p>
             </div>
@@ -1240,13 +1795,13 @@
             </div>
 
             <div class="feature-card">
-                <div class="feature-icon">📊</div>
+                <div class="feature-icon">📈</div>
                 <h3>Automated P&L Audits</h3>
                 <p>Daily, weekly, and monthly automated reports showing revenue breakdown, order trends, and performance metrics across all channels. Know your numbers without logging in.</p>
             </div>
 
             <div class="feature-card">
-                <div class="feature-icon">💰</div>
+                <div class="feature-icon">🔍</div>
                 <h3>Revenue Leak Detection</h3>
                 <p>Instantly spot missing revenue or high cancellation fees that usually get buried in complex platform spreadsheets. Protect every dollar you earn.</p>
             </div>
@@ -1272,6 +1827,7 @@
             <h2>Upload at Night, Insights by Morning</h2>
             <p>Four simple steps to transform your restaurant data chaos into clarity</p>
         </div>
+
         <div class="steps-grid">
             <div class="step-card">
                 <div class="step-number">1</div>
@@ -1279,18 +1835,21 @@
                 <h3>Rapid Upload</h3>
                 <p>Drag and drop your DoorDash, Uber Eats, and Grubhub platform exports before you head home. Takes 2 minutes.</p>
             </div>
+
             <div class="step-card">
                 <div class="step-number">2</div>
-                <div class="step-icon">🔄</div>
+                <div class="step-icon">🧠</div>
                 <h3>AI Normalization</h3>
                 <p>While you sleep, our AI engine cleans the data, syncs menu items, and calculates your true net profit across all channels.</p>
             </div>
+
             <div class="step-card">
                 <div class="step-number">3</div>
                 <div class="step-icon">☕</div>
                 <h3>Morning Tea Dashboard</h3>
                 <p>Wake up to a finalized dashboard with daily, weekly, and monthly views. No manual entry, no spreadsheets—just the truth about your revenue.</p>
             </div>
+
             <div class="step-card">
                 <div class="step-number">4</div>
                 <div class="step-icon">🚀</div>
@@ -1337,7 +1896,7 @@
 
             <!-- Growth Plan -->
             <div class="pricing-card featured">
-                <span class="plan-badge">Owner's Choice: ROI in 14 Days</span>
+                <span class="plan-badge">Owner's Choice • ROI in 14 Days</span>
                 <h3>Growth</h3>
                 <p class="subtitle">For growing multi-unit operations</p>
                 <div class="price" id="growth-price">$149<span>/month</span></div>
@@ -1400,6 +1959,7 @@
                 <div class="footer-logo">Synletics</div>
                 <p class="footer-description">The Morning Tea Dashboard for multi-unit restaurant owners. Transform delivery data chaos into automated P&L clarity.</p>
             </div>
+
             <div class="footer-section">
                 <h4>Product</h4>
                 <ul class="footer-links">
@@ -1409,6 +1969,7 @@
                     <li><a href="#">Integrations</a></li>
                 </ul>
             </div>
+
             <div class="footer-section">
                 <h4>Company</h4>
                 <ul class="footer-links">
@@ -1418,6 +1979,7 @@
                     <li><a href="#">Contact</a></li>
                 </ul>
             </div>
+
             <div class="footer-section">
                 <h4>Legal</h4>
                 <ul class="footer-links">
@@ -1427,32 +1989,14 @@
                 </ul>
             </div>
         </div>
+
         <div class="footer-bottom">
-            <p>&copy; 2025 Synletics. All rights reserved.</p>
+            <p>© 2025 Synletics. All rights reserved.</p>
         </div>
     </footer>
 
     <!-- JavaScript -->
     <script>
-        
-        // Time Period Selector
-        const periodButtons = document.querySelectorAll('.period-btn');
-
-        periodButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                periodButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-
-                const mockupCards = document.querySelectorAll('.mockup-card');
-                mockupCards.forEach(card => {
-                    card.style.opacity = '0.7';
-                    setTimeout(() => {
-                        card.style.opacity = '1';
-                    }, 150);
-                });
-            });
-        });
-
         // Pricing Toggle
         const toggle = document.getElementById('pricing-toggle');
         const monthlyLabel = document.getElementById('monthly-label');
@@ -1498,14 +2042,228 @@
                 }
             });
         });
-
-        // Mobile menu toggle
-        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-        const navLinks = document.querySelector('.nav-links');
-
-        mobileMenuToggle.addEventListener('click', () => {
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-        });
     </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const isMobile = window.innerWidth <= 768;
+
+    // ========== MOBILE NAVIGATION ========== 
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    const mobileOverlay = document.querySelector('.mobile-menu-overlay');
+    const body = document.body;
+
+    if (mobileMenuToggle && navLinks) {
+        // Toggle menu
+        mobileMenuToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            navLinks.classList.toggle('active');
+            mobileMenuToggle.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+
+            if (navLinks.classList.contains('active')) {
+                body.style.overflow = 'hidden';
+            } else {
+                body.style.overflow = '';
+            }
+        });
+
+        // Close on link click
+        const links = navLinks.querySelectorAll('a');
+        links.forEach(link => {
+            link.addEventListener('click', function() {
+                navLinks.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+                mobileOverlay.classList.remove('active');
+                body.style.overflow = '';
+            });
+        });
+
+        // Close on overlay click
+        mobileOverlay.addEventListener('click', function() {
+            navLinks.classList.remove('active');
+            mobileMenuToggle.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            body.style.overflow = '';
+        });
+    }
+
+    // ========== TOUCH FEEDBACK FOR ALL ELEMENTS ========== 
+    if (isMobile) {
+        // All Cards
+        const allCards = document.querySelectorAll('.feature-card, .step-card, .pricing-card, .mockup-card, .testimonial-card');
+        allCards.forEach(card => {
+            card.addEventListener('touchstart', function() {
+                this.style.transform = 'scale(0.98)';
+                this.style.boxShadow = '0 8px 30px rgba(0, 0, 0, 0.45)';
+            }, { passive: true });
+
+            card.addEventListener('touchend', function() {
+                this.style.transform = '';
+                this.style.boxShadow = '';
+            }, { passive: true });
+
+            card.addEventListener('touchcancel', function() {
+                this.style.transform = '';
+                this.style.boxShadow = '';
+            }, { passive: true });
+        });
+
+        // All Buttons
+        const allButtons = document.querySelectorAll('.cta-button, .primary-cta, .secondary-cta, .cta-button-large, .pricing-cta, .period-btn');
+        allButtons.forEach(button => {
+            button.addEventListener('touchstart', function() {
+                this.style.transform = 'scale(0.95)';
+                this.style.opacity = '0.85';
+            }, { passive: true });
+
+            button.addEventListener('touchend', function() {
+                setTimeout(() => {
+                    this.style.transform = '';
+                    this.style.opacity = '';
+                }, 150);
+            }, { passive: true });
+
+            button.addEventListener('touchcancel', function() {
+                this.style.transform = '';
+                this.style.opacity = '';
+            }, { passive: true });
+        });
+
+        // Nav Links
+        const navLinkItems = document.querySelectorAll('.nav-links a');
+        navLinkItems.forEach(link => {
+            link.addEventListener('touchstart', function() {
+                this.style.background = 'rgba(255,255,255,0.1)';
+            }, { passive: true });
+
+            link.addEventListener('touchend', function() {
+                setTimeout(() => {
+                    this.style.background = '';
+                }, 200);
+            }, { passive: true });
+        });
+
+        // Toggle Switch
+        const toggleSwitch = document.querySelector('.toggle-switch');
+        if (toggleSwitch) {
+            toggleSwitch.addEventListener('touchstart', function() {
+                this.style.transform = 'scale(0.95)';
+            }, { passive: true });
+
+            toggleSwitch.addEventListener('touchend', function() {
+                this.style.transform = '';
+            }, { passive: true });
+        }
+
+        // Platform Logos
+        const platformLogos = document.querySelectorAll('.platform-logo');
+        platformLogos.forEach(logo => {
+            logo.addEventListener('touchstart', function() {
+                this.style.transform = 'scale(1.05)';
+                this.style.opacity = '0.7';
+            }, { passive: true });
+
+            logo.addEventListener('touchend', function() {
+                this.style.transform = '';
+                this.style.opacity = '';
+            }, { passive: true });
+        });
+
+        // ========== CAROUSEL PAGINATION ==========
+        function setupCarousel(containerSelector, cardSelector) {
+            const containers = document.querySelectorAll(containerSelector);
+
+            containers.forEach(container => {
+                const cards = container.querySelectorAll(cardSelector);
+                if (cards.length === 0 || window.innerWidth > 768) return;
+
+                const wrapper = container.parentElement;
+
+                // Remove existing indicators
+                const existingIndicators = wrapper.querySelector('.carousel-indicators');
+                const existingCounter = wrapper.querySelector('.card-counter');
+                if (existingIndicators) existingIndicators.remove();
+                if (existingCounter) existingCounter.remove();
+
+                // Create indicators
+                const indicatorsDiv = document.createElement('div');
+                indicatorsDiv.className = 'carousel-indicators';
+
+                const counterDiv = document.createElement('div');
+                counterDiv.className = 'card-counter';
+
+                for (let i = 0; i < cards.length; i++) {
+                    const dot = document.createElement('span');
+                    dot.className = 'carousel-dot';
+                    if (i === 0) dot.classList.add('active');
+                    indicatorsDiv.appendChild(dot);
+                }
+
+                wrapper.appendChild(indicatorsDiv);
+                wrapper.appendChild(counterDiv);
+
+                function updateIndicators() {
+                    const scrollLeft = container.scrollLeft;
+                    const cardWidth = cards[0].offsetWidth + 20;
+                    const currentIndex = Math.round(scrollLeft / cardWidth);
+
+                    const dots = indicatorsDiv.querySelectorAll('.carousel-dot');
+                    dots.forEach((dot, index) => {
+                        dot.classList.toggle('active', index === currentIndex);
+                    });
+
+                    counterDiv.textContent = `${currentIndex + 1}/${cards.length}`;
+
+                    // Touch feedback for dots
+                    dots.forEach((dot, index) => {
+                        dot.onclick = () => {
+                            container.scrollTo({
+                                left: index * cardWidth,
+                                behavior: 'smooth'
+                            });
+                        };
+
+                        dot.addEventListener('touchstart', function() {
+                            this.style.transform = 'scale(1.4)';
+                        }, { passive: true });
+
+                        dot.addEventListener('touchend', function() {
+                            this.style.transform = '';
+                        }, { passive: true });
+                    });
+                }
+
+                container.addEventListener('scroll', updateIndicators);
+                updateIndicators();
+            });
+        }
+
+        if (isMobile) {
+            setupCarousel('.bento-grid', '.feature-card');
+            setupCarousel('.steps-grid', '.step-card');
+            setupCarousel('.pricing-grid', '.pricing-card');
+        }
+
+        // Re-setup on resize
+        let resizeTimer;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function() {
+                const nowMobile = window.innerWidth <= 768;
+                document.querySelectorAll('.carousel-indicators, .card-counter').forEach(el => el.remove());
+
+                if (nowMobile) {
+                    setupCarousel('.bento-grid', '.feature-card');
+                    setupCarousel('.steps-grid', '.step-card');
+                    setupCarousel('.pricing-grid', '.pricing-card');
+                }
+            }, 250);
+        });
+    }
+});
+</script>
+
 </body>
 </html>
